@@ -1,0 +1,51 @@
+services:
+  songmanager:
+    image: songmanager
+    user: root
+    build:
+      context: ./SongManagerAPI
+      dockerfile: Dockerfile
+    container_name: songmanager_c
+    volumes:
+      - ./songs:/app/songs
+    ports: 
+      - 5000:5000
+    environment:
+      ASPNETCORE_URLS: "http://*:5000"      
+    networks:
+      - songmanager-network
+
+  songmanager-app:
+    image: songmanager-app
+    build:
+      context: ./SongManagerApp
+      dockerfile: Dockerfile    
+    depends_on:
+      - songmanager-database
+    restart: on-failure
+    container_name: songmanager-app_c
+    ports: 
+      - 5173:5173
+    networks:
+      - songmanager-network  
+  
+  songmanager-database:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: songmanager-database_c
+    ports: 
+      - 5432:5432
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password@123"
+    networks:
+      - songmanager-network 
+    volumes:
+      - mssql_server:/var/opt/mssql
+
+networks:
+  songmanager-network:
+    driver: "bridge"
+
+volumes:
+  mssql_server:
+  songs:
