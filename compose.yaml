@@ -19,7 +19,9 @@ services:
     image: songmanager-app
     build:
       context: ./SongManagerApp
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile
+    volumes:
+      - ./SongManagerApp:/app    
     depends_on:
       - songmanager-database
     restart: on-failure
@@ -44,7 +46,7 @@ services:
 
 networks:
   songmanager-network:
-    driver: "bridge"
+    driver: bridge
 
 volumes:
   mssql_server:
