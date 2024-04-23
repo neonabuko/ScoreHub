@@ -8,6 +8,7 @@ services:
     container_name: songmanager_c
     volumes:
       - ./songs:/app/songs
+      - ./songs/tmp:/app/songs/tmp
     ports: 
       - 5000:5000
     environment:
