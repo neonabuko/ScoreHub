@@ -9,10 +9,12 @@ services:
     volumes:
       - ./songs:/app/songs
       - ./songs/tmp:/app/songs/tmp
+      - ./songs/scores:/app/scores
     ports: 
       - 5000:5000
     environment:
-      ASPNETCORE_URLS: "http://*:5000"      
+      ASPNETCORE_URLS: "http://*:5000"
+      ASPNETCORE_ENVIRONMENT: Development
     networks:
       - songmanager-network
 
