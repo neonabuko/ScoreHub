@@ -9,7 +9,7 @@ services:
     volumes:
       - ./songs:/app/songs
       - ./songs/tmp:/app/songs/tmp
-      - ./songs/scores:/app/scores
+      - ./scores:/app/scores
     ports: 
       - 5000:5000
     environment:
