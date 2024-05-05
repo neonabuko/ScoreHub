@@ -3,7 +3,7 @@ services:
     image: scorehub-api
     user: root
     build:
-      context: ./ScoreHub-API
+      context: ./ScoreHubAPI
       dockerfile: Dockerfile
     container_name: scorehub-api_c
     volumes:
@@ -22,10 +22,10 @@ services:
   scorehub-app:
     image: scorehub-app
     build:
-      context: ./ScoreHub-App
+      context: ./ScoreHubApp
       dockerfile: Dockerfile
     volumes:
-      - ./ScoreHub-App:/app    
+      - ./ScoreHubApp:/app    
     depends_on:
       - songmanager-database
     restart: on-failure
