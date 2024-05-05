@@ -1,11 +1,11 @@
 services:
-  songmanager:
-    image: songmanager
+  scorehub-api:
+    image: scorehub-api
     user: root
     build:
-      context: ./SongManagerAPI
+      context: ./ScoreHub-API
       dockerfile: Dockerfile
-    container_name: songmanager_c
+    container_name: scorehub-api_c
     volumes:
       - ./songs:/app/songs
       - ./songs/tmp:/app/songs/tmp
@@ -19,17 +19,17 @@ services:
     networks:
       - songmanager-network
 
-  songmanager-app:
-    image: songmanager-app
+  scorehub-app:
+    image: scorehub-app
     build:
-      context: ./SongManagerApp
+      context: ./ScoreHub-App
       dockerfile: Dockerfile
     volumes:
-      - ./SongManagerApp:/app    
+      - ./ScoreHub-App:/app    
     depends_on:
       - songmanager-database
     restart: on-failure
-    container_name: songmanager-app_c
+    container_name: scorehub-app_c
     ports: 
       - 5173:5173
     networks:
