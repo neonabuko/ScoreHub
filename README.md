@@ -1,4 +1,4 @@
-# Song Manager
+# ScoreHub
 
 ## Requirements:
 * Docker Compose
@@ -6,7 +6,7 @@
 ## Installing/Running:
 
 ```bash
-git clone https://github.com/neonabuko/SongManager
-cd SongManager
+git clone https://github.com/neonabuko/ScoreHub
+cd ScoreHub
 docker compose up
 ```
