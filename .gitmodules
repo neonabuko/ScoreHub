@@ -1,0 +1,6 @@
+[submodule "submodules/ScoreHubAPI"]
+	path = submodules/ScoreHubAPI
+	url = https://github.com/neonabuko/ScoreHub-API
+[submodule "submodules/ScoreHubApp"]
+	path = submodules/ScoreHubApp
+	url = https://github.com/neonabuko/ScoreHub-App
