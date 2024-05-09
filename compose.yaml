@@ -17,7 +17,7 @@ services:
       ASPNETCORE_URLS: "http://*:5000"
       ASPNETCORE_ENVIRONMENT: Development
     networks:
-      scorehub scorehub-network
+      - scorehub-network
 
   scorehub-app:
     image: scorehub-app
@@ -33,7 +33,7 @@ services:
     ports: 
       - 5173:5173
     networks:
-      scorehub scorehub-network  
+      - scorehub-network  
   
   scorehub-db:
     image: mcr.microsoft.com/mssql/server:latest
@@ -44,7 +44,7 @@ services:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Password@123"
     networks:
-      scorehub scorehub-network 
+      - scorehub-network 
     volumes:
       - mssql_server:/var/opt/mssql
 
