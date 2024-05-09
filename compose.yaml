@@ -17,7 +17,7 @@ services:
       ASPNETCORE_URLS: "http://*:5000"
       ASPNETCORE_ENVIRONMENT: Development
     networks:
-      - songmanager-network
+      scorehub scorehub-network
 
   scorehub-app:
     image: scorehub-app
@@ -27,29 +27,29 @@ services:
     volumes:
       - ./submodules/ScoreHubApp:/app    
     depends_on:
-      - songmanager-database
+      - scorehub-db
     restart: on-failure
     container_name: scorehub-app_c
     ports: 
       - 5173:5173
     networks:
-      - songmanager-network  
+      scorehub scorehub-network  
   
-  songmanager-database:
+  scorehub-db:
     image: mcr.microsoft.com/mssql/server:latest
-    container_name: songmanager-database_c
+    container_name: scorehub-db_c
     ports: 
       - 5432:5432
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Password@123"
     networks:
-      - songmanager-network 
+      scorehub scorehub-network 
     volumes:
       - mssql_server:/var/opt/mssql
 
 networks:
-  songmanager-network:
+  scorehub-network:
     driver: bridge
 
 volumes:
