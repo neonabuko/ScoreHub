@@ -1,6 +1,5 @@
 services:
-  scorehub-api:
-    image: scorehub-api
+  api:
     user: root
     build:
       context: ./submodules/ScoreHubAPI
@@ -16,24 +15,21 @@ services:
     environment:
       ASPNETCORE_URLS: "http://*:5000"
       ASPNETCORE_ENVIRONMENT: Development
-    networks:
-      - scorehub-network
+    depends_on:
+      - scorehub-db
 
-  scorehub-app:
-    image: scorehub-app
+  app:
     build:
       context: ./submodules/ScoreHubApp
       dockerfile: Dockerfile
     volumes:
-      - ./submodules/ScoreHubApp:/app    
-    depends_on:
-      - scorehub-db
+      - ./submodules/ScoreHubApp:/app
     restart: on-failure
     container_name: scorehub-app_c
     ports: 
       - 5173:5173
-    networks:
-      - scorehub-network  
+    depends_on:
+      - api      
   
   scorehub-db:
     image: mcr.microsoft.com/mssql/server:latest
@@ -43,14 +39,8 @@ services:
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Password@123"
-    networks:
-      - scorehub-network 
     volumes:
       - mssql_server:/var/opt/mssql
-
-networks:
-  scorehub-network:
-    driver: bridge
 
 volumes:
   mssql_server:
